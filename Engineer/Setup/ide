@@ -1,1 +1,62 @@
+Guide: Choosing Your IDE (Maxpri Engineering)
+1. Overview
+Maxpri engineers need an IDE that supports Git, extensions, debugging, and efficient development workflows. While you may use any editor you prefer, the recommended choice is Visual Studio Code (VS Code) because it integrates directly with Git and provides a full-featured development environment.
 
+Recommended IDE: Visual Studio Code
+Why VS Code is Highly Recommended
+VS Code offers the features required for Maxpri’s engineering workflow:
+
+Built‑in Git support
+
+Full Git UI (commit, push, pull, branch management)
+
+Integrated terminal
+
+Extensions for every major language and framework
+
+Debugging tools
+
+Workspace organization
+
+Support for SSH development and remote containers
+
+Reliable performance across Windows, macOS, and Linux
+
+Git Integration
+VS Code allows you to use Git directly inside the editor:
+
+View changes
+
+Stage and commit
+
+Push and pull
+
+Manage branches
+
+Resolve merge conflicts
+
+View Git history
+
+This is essential because Maxpri uses Git for all source control, and VS Code makes the workflow straightforward.
+
+If you check the Git folder in your onboarding materials, you’ll see examples and instructions that align directly with VS Code’s Git interface.
+
+Alternative Option: Web‑Based IDEs
+You may use a web IDE if necessary, but be aware of the limitations:
+
+Limitations of Web IDEs
+Very limited feature set
+
+No built‑in Git support
+
+No local debugging
+
+No extensions
+
+No integrated terminal
+
+Often slower and less reliable
+
+Not suitable for long‑term Maxpri development work
+
+Web IDEs are acceptable only for quick edits or emergency access. They are not recommended for daily engineering tasks.
