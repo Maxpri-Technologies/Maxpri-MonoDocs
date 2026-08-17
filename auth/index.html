@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maxpri ID — Your Key to the Ecosystem</title>
+<style>
+  :root {
+    --bg: #050505;
+    --surface: #0f0f0f;
+    --card: #141414;
+    --border: rgba(255,255,255,0.08);
+    --border-bright: rgba(255,255,255,0.15);
+    --text: #f0f0f0;
+    --muted: #6b6b6b;
+    --subtle: #3a3a3a;
+    --accent: #3b82f6;
+    --accent-dim: rgba(59,130,246,0.12);
+    --accent-glow: rgba(59,130,246,0.25);
+    --cyan: #06b6d4;
+    --success: #10b981;
+    --success-dim: rgba(16,185,129,0.12);
+    --danger: #ef4444;
+    --danger-dim: rgba(239,68,68,0.1);
+    --gold: #f59e0b;
+    --gold-dim: rgba(245,158,11,0.1);
+    --radius: 10px;
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --mono: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2rem 1rem;
+  }
+  .topbar {
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+  }
+  .logo-mark { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-hex {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--accent), var(--cyan));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: #fff; letter-spacing: -0.5px;
+  }
+  .logo-name { font-size: 1rem; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+  .logo-name span { color: var(--accent); }
+  .ecosystem-badge {
+    font-size: 11px; color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 20px; padding: 4px 10px; letter-spacing: 0.3px;
+  }
+  .panel { width: 100%; max-width: 440px; display: none; flex-direction: column; gap: 0; }
+  .panel.active { display: flex; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .panel-head { margin-bottom: 1.75rem; }
+  .panel-eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
+  }
+  .panel-title { font-size: 1.5rem; font-weight: 700; color: var(--text); letter-spacing: -0.5px; line-height: 1.2; }
+  .panel-sub { font-size: 0.875rem; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+  .field { margin-bottom: 1rem; }
+  .field label { display: block; font-size: 13px; font-weight: 500; color: #a0a0a0; margin-bottom: 6px; }
+  .field input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 15px;
+    padding: 11px 14px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .field input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .field input::placeholder { color: var(--subtle); }
+  .field input.error { border-color: var(--danger); box-shadow: 0 0 0 3px var(--danger-dim); }
+  .field-hint { font-size: 12px; color: var(--muted); margin-top: 5px; }
+  .field-error { font-size: 12px; color: var(--danger); margin-top: 5px; display: none; }
+  .field-error.visible { display: block; }
+  .btn {
+    width: 100%; padding: 12px 20px;
+    border: none; border-radius: var(--radius);
+    font-family: var(--font); font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; letter-spacing: -0.2px;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:disabled { background: #1e3a6e; color: #4a6fa8; cursor: not-allowed; transform: none; }
+  .btn-ghost {
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--border); font-size: 14px; padding: 10px 20px;
+  }
+  .btn-ghost:hover { border-color: var(--border-bright); color: var(--text); }
+  .btn-danger {
+    background: var(--danger-dim); color: var(--danger);
+    border: 1px solid rgba(239,68,68,0.2);
+    font-size: 13px; padding: 8px 16px; width: auto;
+  }
+  .btn-danger:hover { background: rgba(239,68,68,0.18); }
+  .divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 1.25rem 0; color: var(--muted); font-size: 12px;
+  }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .switch-text { text-align: center; font-size: 13px; color: var(--muted); margin-top: 1.25rem; }
+  .switch-text button {
+    background: none; border: none; color: var(--accent);
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    padding: 0; font-family: var(--font);
+  }
+  .switch-text button:hover { text-decoration: underline; }
+  .code-reveal {
+    background: var(--surface);
+    border: 1px solid rgba(59,130,246,0.3);
+    border-radius: 14px; padding: 1.5rem; text-align: center;
+    margin: 1rem 0; position: relative; overflow: hidden;
+  }
+  .code-reveal::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top, rgba(59,130,246,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .code-reveal-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+  }
+  .access-code {
+    font-family: var(--mono); font-size: 2.2rem; font-weight: 700;
+    letter-spacing: 8px; color: var(--text); padding: 0.5rem 0;
+    user-select: all; position: relative; z-index: 1;
+  }
+  .code-copy-row { display: flex; gap: 8px; margin-top: 1rem; justify-content: center; }
+  .btn-copy {
+    background: var(--accent-dim);
+    border: 1px solid rgba(59,130,246,0.25);
+    color: var(--accent); border-radius: 8px;
+    font-family: var(--font); font-size: 13px; font-weight: 600;
+    padding: 7px 16px; cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .btn-copy:hover { background: rgba(59,130,246,0.2); }
+  .btn-copy.copied { background: var(--success-dim); border-color: rgba(16,185,129,0.25); color: var(--success); }
+  .warning-box {
+    background: var(--gold-dim); border: 1px solid rgba(245,158,11,0.2);
+    border-radius: var(--radius); padding: 12px 14px;
+    font-size: 13px; color: #d4a017; line-height: 1.5;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .warning-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+  .success-box {
+    background: var(--success-dim); border: 1px solid rgba(16,185,129,0.2);
+    border-radius: var(--radius); padding: 12px 14px;
+    font-size: 13px; color: #34d399; line-height: 1.5;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .code-slots { display: flex; gap: 8px; justify-content: center; margin: 1rem 0; }
+  .code-slot {
+    width: 46px; height: 52px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text);
+    font-family: var(--mono); font-size: 1.3rem; font-weight: 700;
+    text-align: center; outline: none; caret-color: var(--accent);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    letter-spacing: 0; text-transform: uppercase;
+  }
+  .code-slot:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .code-slot.filled { border-color: rgba(59,130,246,0.4); background: rgba(59,130,246,0.05); }
+  .code-slot.shake { animation: shake 0.35s ease; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+  }
+  .apps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 1rem; }
+  .app-tile {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px; cursor: pointer;
+    transition: all 0.15s; text-align: center; text-decoration: none;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .app-tile:hover { border-color: var(--border-bright); background: rgba(255,255,255,0.04); transform: translateY(-1px); }
+  .app-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .app-icon.blue { background: var(--accent-dim); }
+  .app-icon.cyan { background: rgba(6,182,212,0.12); }
+  .app-icon.purple { background: rgba(139,92,246,0.12); }
+  .app-icon.emerald { background: rgba(16,185,129,0.12); }
+  .app-name { font-size: 12px; font-weight: 600; color: #c0c0c0; }
+  .app-desc { font-size: 11px; color: var(--muted); line-height: 1.3; }
+  .account-card {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px; margin-bottom: 1.25rem;
+  }
+  .avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--cyan));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .account-info { flex: 1; min-width: 0; }
+  .account-name { font-size: 14px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .account-email { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .account-status { font-size: 10px; font-weight: 600; background: var(--success-dim); color: var(--success); border-radius: 20px; padding: 3px 8px; flex-shrink: 0; }
+  .strength-bar { height: 3px; background: var(--border); border-radius: 3px; margin-top: 8px; overflow: hidden; }
+  .strength-fill { height: 100%; border-radius: 3px; transition: width 0.3s, background 0.3s; width: 0%; }
+  .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.2); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .footer-note { margin-top: 1.5rem; text-align: center; font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .footer-note a { color: #5a5a5a; text-decoration: none; }
+  .footer-note a:hover { color: var(--muted); }
+  .dot-sep { margin: 0 6px; }
+  .stepper { display: flex; gap: 6px; align-items: center; margin-bottom: 1.5rem; }
+  .step-dot { height: 3px; border-radius: 3px; background: var(--border); transition: all 0.3s; flex: 1; }
+  .step-dot.active { background: var(--accent); }
+  .step-dot.done { background: var(--success); }
+  .trusted-strip { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .trusted-pill { font-size: 11px; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; }
+  .link-btn { background: none; border: none; color: var(--muted); font-size: 12px; cursor: pointer; font-family: var(--font); padding: 0; }
+  .link-btn:hover { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="https://maxpritech.com" class="logo-mark">
+    <div class="logo-hex">M</div>
+    <span class="logo-name">Maxpri <span>ID</span></span>
+  </a>
+  <span class="ecosystem-badge">Ecosystem Auth</span>
+</div>
+
+<!-- PANEL: ENTRY -->
+<div class="panel active" id="panel-entry">
+  <div class="card">
+    <div class="panel-head">
+      <div class="panel-eyebrow">One account. Every app.</div>
+      <div class="panel-title">Sign in to Maxpri</div>
+      <div class="panel-sub">Your single identity across the entire Maxpri ecosystem.</div>
+    </div>
+    <div class="trusted-strip" style="margin-bottom:1.5rem;">
+      <span class="trusted-pill">Voyager AI</span>
+      <span class="trusted-pill">Maxpri Pulse</span>
+      <span class="trusted-pill">Maxpri Write</span>
+      <span class="trusted-pill">+ all apps</span>
+    </div>
+    <button class="btn btn-primary" id="btn-entry-login">Sign in with access code</button>
+    <div class="divider">or</div>
+    <button class="btn btn-ghost" id="btn-entry-signup">Create a new Maxpri account</button>
+    <div class="switch-text" style="margin-top:1rem;">
+      <span style="color:#444;">New to Maxpri? </span>
+      <button id="btn-entry-signup2">Create an account →</button>
+    </div>
+  </div>
+  <div class="footer-note">
+    By continuing you agree to the
+    <a href="#">Terms of Service</a><span class="dot-sep">·</span><a href="#">Privacy Policy</a>
+  </div>
+</div>
+
+<!-- PANEL: SIGN UP -->
+<div class="panel" id="panel-signup">
+  <div class="card">
+    <div class="stepper">
+      <div class="step-dot active" id="signup-step1"></div>
+      <div class="step-dot" id="signup-step2"></div>
+    </div>
+    <div class="panel-head">
+      <div class="panel-eyebrow">Create account</div>
+      <div class="panel-title">Who are you?</div>
+      <div class="panel-sub">Set up your Maxpri identity. One account unlocks every product.</div>
+    </div>
+    <div class="field">
+      <label for="signup-name">Full name</label>
+      <input type="text" id="signup-name" placeholder="Daniel Aronbabu" autocomplete="name" />
+      <div class="field-error" id="err-name">Enter your full name.</div>
+    </div>
+    <div class="field">
+      <label for="signup-email">Email address</label>
+      <input type="email" id="signup-email" placeholder="you@example.com" autocomplete="email" />
+      <div class="field-error" id="err-email">Enter a valid email address.</div>
+    </div>
+    <div class="field">
+      <label for="signup-pass">Password</label>
+      <input type="password" id="signup-pass" placeholder="At least 8 characters" autocomplete="new-password" />
+      <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
+      <div class="field-hint" id="strength-label" style="margin-top:6px;"></div>
+      <div class="field-error" id="err-pass">Password must be at least 8 characters.</div>
+    </div>
+    <div style="margin-top:1.5rem;">
+      <button class="btn btn-primary" id="btn-signup-submit">Continue →</button>
+    </div>
+    <div class="switch-text">
+      Already have an account? <button id="btn-signup-to-login">Sign in</button>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL: CODE REVEAL -->
+<div class="panel" id="panel-code-reveal">
+  <div class="card">
+    <div class="stepper">
+      <div class="step-dot done"></div>
+      <div class="step-dot active"></div>
+    </div>
+    <div class="panel-head">
+      <div class="panel-eyebrow">Account created</div>
+      <div class="panel-title">Your access code</div>
+      <div class="panel-sub">This is the only password you'll need across every Maxpri product. Store it somewhere safe.</div>
+    </div>
+    <div class="code-reveal">
+      <div class="code-reveal-label">Maxpri Access Code</div>
+      <div class="access-code" id="generated-code">—</div>
+      <div class="code-copy-row">
+        <button class="btn-copy" id="copy-btn">
+          <span id="copy-icon">⎘</span>
+          <span id="copy-label">Copy code</span>
+        </button>
+      </div>
+    </div>
+    <div class="warning-box" style="margin-top:0.75rem;">
+      <span class="warning-icon">⚠</span>
+      <div>
+        <strong style="display:block;margin-bottom:3px;">Save this now</strong>
+        This code is shown once. If you lose it, you'll need to reset your account. Screenshot it or save it to a password manager.
+      </div>
+    </div>
+    <div style="margin-top:1.25rem;">
+      <button class="btn btn-primary" id="btn-reveal-continue">I've saved it — go to my account</button>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL: LOGIN -->
+<div class="panel" id="panel-login">
+  <div class="card">
+    <div class="panel-head">
+      <div class="panel-eyebrow">Sign in</div>
+      <div class="panel-title">Enter your access code</div>
+      <div class="panel-sub">Your 7-character Maxpri code. Sign in once, access everything.</div>
+    </div>
+    <div class="field">
+      <label for="login-email">Email address</label>
+      <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email" />
+      <div class="field-error" id="err-login-email">Enter your email.</div>
+    </div>
+    <div style="margin-bottom:0.75rem;">
+      <label style="font-size:13px;font-weight:500;color:#a0a0a0;display:block;margin-bottom:10px;">Access code</label>
+      <div class="code-slots" id="code-slots">
+        <input class="code-slot" maxlength="1" data-index="0" />
+        <input class="code-slot" maxlength="1" data-index="1" />
+        <input class="code-slot" maxlength="1" data-index="2" />
+        <input class="code-slot" maxlength="1" data-index="3" />
+        <input class="code-slot" maxlength="1" data-index="4" />
+        <input class="code-slot" maxlength="1" data-index="5" />
+        <input class="code-slot" maxlength="1" data-index="6" />
+      </div>
+      <div class="field-error" id="err-login-code" style="text-align:center;font-size:13px;">Code not found. Check and try again.</div>
+    </div>
+    <div style="margin-top:1rem;">
+      <button class="btn btn-primary" id="login-btn" disabled>Sign in to Maxpri</button>
+    </div>
+    <div class="switch-text">
+      No account yet? <button id="btn-login-to-signup">Create one →</button>
+    </div>
+    <div style="text-align:center;margin-top:0.5rem;">
+      <button class="link-btn" id="btn-login-back">← Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL: DASHBOARD -->
+<div class="panel" id="panel-dashboard">
+  <div class="card">
+    <div class="account-card">
+      <div class="avatar" id="dash-avatar">—</div>
+      <div class="account-info">
+        <div class="account-name" id="dash-name">—</div>
+        <div class="account-email" id="dash-email">—</div>
+      </div>
+      <div class="account-status">Active</div>
+    </div>
+    <div class="panel-head" style="margin-bottom:1rem;">
+      <div class="panel-eyebrow">Ecosystem</div>
+      <div class="panel-title">Choose your app</div>
+    </div>
+    <div class="apps-grid">
+      <a class="app-tile" href="https://maxpritech.com/voyager" target="_blank">
+        <div class="app-icon blue">⬡</div>
+        <div class="app-name">Voyager AI</div>
+        <div class="app-desc">AI workspace &amp; command center</div>
+      </a>
+      <div class="app-tile" id="tile-pulse">
+        <div class="app-icon cyan">◈</div>
+        <div class="app-name">Maxpri Pulse</div>
+        <div class="app-desc">AI intelligence layer</div>
+      </div>
+      <div class="app-tile" id="tile-write">
+        <div class="app-icon purple">✦</div>
+        <div class="app-name">Maxpri Write</div>
+        <div class="app-desc">Documents &amp; knowledge base</div>
+      </div>
+      <a class="app-tile" href="https://maxpritech.com" target="_blank">
+        <div class="app-icon emerald">◇</div>
+        <div class="app-name">maxpritech.com</div>
+        <div class="app-desc">Main site &amp; order portal</div>
+      </a>
+    </div>
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border);">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Your access code</div>
+      <div id="dash-code-display" style="font-family:var(--mono);font-size:1rem;font-weight:700;letter-spacing:5px;color:#555;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;">———————</div>
+    </div>
+    <div style="margin-top:1rem;display:flex;gap:8px;justify-content:space-between;align-items:center;">
+      <div style="font-size:12px;color:var(--muted);">Code is your universal key — keep it private.</div>
+      <button class="btn-danger btn" id="btn-signout" style="width:auto;">Sign out</button>
+    </div>
+  </div>
+  <div id="coming-soon-notice" style="display:none;margin-top:1rem;">
+    <div class="card" style="padding:1rem 1.25rem;">
+      <div class="success-box">
+        <span>🔜</span>
+        <div><strong id="coming-soon-name">App</strong> is coming soon. Your Maxpri ID will grant access when it launches.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  var DB_KEY = 'maxpri_accounts';
+  var currentUser = null;
+  var sessionCode = null;
+
+  function getAccounts() {
+    try { return JSON.parse(localStorage.getItem(DB_KEY) || '{}'); } catch (e) { return {}; }
+  }
+  function saveAccounts(db) {
+    localStorage.setItem(DB_KEY, JSON.stringify(db));
+  }
+
+  function showPanel(id) {
+    document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+    clearLoginError();
+  }
+
+  function generateCode() {
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    var db = getAccounts();
+    var code, attempts = 0;
+    do {
+      code = Array.from({length: 7}, function() {
+        return chars[Math.floor(Math.random() * chars.length)];
+      }).join('');
+      attempts++;
+    } while (db[code] && attempts < 100);
+    return code;
+  }
+
+  document.getElementById('signup-pass').addEventListener('input', function () {
+    var val = this.value;
+    var fill = document.getElementById('strength-fill');
+    var label = document.getElementById('strength-label');
+    var score = 0;
+    if (val.length >= 8) score++;
+    if (/[A-Z]/.test(val)) score++;
+    if (/[0-9]/.test(val)) score++;
+    if (/[^A-Za-z0-9]/.test(val)) score++;
+    var map = [
+      {w:'0%',   c:'transparent',   t:''},
+      {w:'25%',  c:'var(--danger)', t:'Weak'},
+      {w:'50%',  c:'var(--gold)',   t:'Fair'},
+      {w:'75%',  c:'#60a5fa',      t:'Good'},
+      {w:'100%', c:'var(--success)',t:'Strong'},
+    ];
+    fill.style.width = map[score].w;
+    fill.style.background = map[score].c;
+    label.textContent = map[score].t;
+    label.style.color = map[score].c;
+  });
+
+  function showErr(errId, inputId) {
+    document.getElementById(errId).classList.add('visible');
+    if (inputId) document.getElementById(inputId).classList.add('error');
+  }
+  function clearErr(errId, inputId) {
+    document.getElementById(errId).classList.remove('visible');
+    if (inputId) document.getElementById(inputId).classList.remove('error');
+  }
+
+  document.getElementById('btn-signup-submit').addEventListener('click', function () {
+    var name  = document.getElementById('signup-name').value.trim();
+    var email = document.getElementById('signup-email').value.trim().toLowerCase();
+    var pass  = document.getElementById('signup-pass').value;
+    var ok = true;
+
+    if (!name) { showErr('err-name', 'signup-name'); ok = false; } else { clearErr('err-name', 'signup-name'); }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('err-email', 'signup-email'); ok = false; } else { clearErr('err-email', 'signup-email'); }
+    if (pass.length < 8) { showErr('err-pass', 'signup-pass'); ok = false; } else { clearErr('err-pass', 'signup-pass'); }
+    if (!ok) return;
+
+    var db = getAccounts();
+    var dup = Object.values(db).find(function(a) { return a.email === email; });
+    if (dup) {
+      showErr('err-email', 'signup-email');
+      document.getElementById('err-email').textContent = 'An account with this email already exists.';
+      return;
+    }
+
+    var code = generateCode();
+    db[code] = { name: name, email: email, createdAt: Date.now() };
+    saveAccounts(db);
+    sessionCode = code;
+    currentUser = db[code];
+
+    document.getElementById('generated-code').textContent = code;
+    showPanel('panel-code-reveal');
+  });
+
+  document.getElementById('copy-btn').addEventListener('click', function () {
+    var code = document.getElementById('generated-code').textContent;
+    navigator.clipboard.writeText(code).then(function () {
+      document.getElementById('copy-icon').textContent = '✓';
+      document.getElementById('copy-label').textContent = 'Copied!';
+      document.getElementById('copy-btn').classList.add('copied');
+      setTimeout(function () {
+        document.getElementById('copy-icon').textContent = '⎘';
+        document.getElementById('copy-label').textContent = 'Copy code';
+        document.getElementById('copy-btn').classList.remove('copied');
+      }, 2000);
+    });
+  });
+
+  document.getElementById('btn-reveal-continue').addEventListener('click', function () {
+    loadDashboard();
+    showPanel('panel-dashboard');
+  });
+
+  function loadDashboard() {
+    if (!currentUser || !sessionCode) return;
+    var initials = currentUser.name.split(' ').map(function(w) { return w[0]; }).join('').toUpperCase().slice(0, 2);
+    document.getElementById('dash-avatar').textContent = initials;
+    document.getElementById('dash-name').textContent = currentUser.name;
+    document.getElementById('dash-email').textContent = currentUser.email;
+    document.getElementById('dash-code-display').textContent = sessionCode;
+  }
+
+  var codeSlots = Array.from(document.querySelectorAll('.code-slot'));
+
+  codeSlots.forEach(function (slot) {
+    slot.addEventListener('input', function () {
+      this.value = this.value.toUpperCase().replace(/[^A-Z2-9]/g, '');
+      var idx = parseInt(this.dataset.index);
+      if (this.value) {
+        this.classList.add('filled');
+        if (idx < 6) codeSlots[idx + 1].focus();
+      } else {
+        this.classList.remove('filled');
+      }
+      updateLoginBtn();
+      clearLoginError();
+    });
+
+    slot.addEventListener('keydown', function (e) {
+      var idx = parseInt(this.dataset.index);
+      if (e.key === 'Backspace' && !this.value && idx > 0) {
+        var prev = codeSlots[idx - 1];
+        prev.value = '';
+        prev.classList.remove('filled');
+        prev.focus();
+        updateLoginBtn();
+      }
+      if (e.key === 'ArrowLeft' && idx > 0) codeSlots[idx - 1].focus();
+      if (e.key === 'ArrowRight' && idx < 6) codeSlots[idx + 1].focus();
+    });
+
+    slot.addEventListener('paste', function (e) {
+      e.preventDefault();
+      var text = (e.clipboardData || window.clipboardData).getData('text')
+        .toUpperCase().replace(/[^A-Z2-9]/g, '').slice(0, 7);
+      codeSlots.forEach(function (s, i) {
+        s.value = text[i] || '';
+        s.classList.toggle('filled', !!s.value);
+      });
+      var last = Math.min(text.length, 6);
+      codeSlots[last].focus();
+      updateLoginBtn();
+    });
+  });
+
+  function getEnteredCode() {
+    return codeSlots.map(function (s) { return s.value; }).join('');
+  }
+
+  function updateLoginBtn() {
+    document.getElementById('login-btn').disabled = getEnteredCode().length < 7;
+  }
+
+  function clearLoginError() {
+    document.getElementById('err-login-code').classList.remove('visible');
+  }
+
+  document.getElementById('login-btn').addEventListener('click', function () {
+    var email = document.getElementById('login-email').value.trim().toLowerCase();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showErr('err-login-email', 'login-email');
+      return;
+    }
+    clearErr('err-login-email', 'login-email');
+
+    var code = getEnteredCode();
+    var btn = document.getElementById('login-btn');
+    btn.innerHTML = '<div class="spinner"></div> Verifying\u2026';
+    btn.disabled = true;
+
+    setTimeout(function () {
+      var db = getAccounts();
+      if (db[code] && db[code].email === email) {
+        sessionCode = code;
+        currentUser = db[code];
+        loadDashboard();
+        showPanel('panel-dashboard');
+        btn.textContent = 'Sign in to Maxpri';
+        codeSlots.forEach(function (s) { s.value = ''; s.classList.remove('filled'); });
+        updateLoginBtn();
+      } else {
+        btn.textContent = 'Sign in to Maxpri';
+        btn.disabled = false;
+        var errEl = document.getElementById('err-login-code');
+        errEl.textContent = db[code] ? 'Email does not match this access code.' : 'Code not found. Check and try again.';
+        errEl.classList.add('visible');
+        codeSlots.forEach(function (s) {
+          s.classList.add('shake');
+          setTimeout(function () { s.classList.remove('shake'); }, 400);
+        });
+      }
+    }, 900);
+  });
+
+  function showComingSoon(name) {
+    document.getElementById('coming-soon-name').textContent = name;
+    var notice = document.getElementById('coming-soon-notice');
+    notice.style.display = 'block';
+    setTimeout(function () { notice.style.display = 'none'; }, 3500);
+  }
+
+  document.getElementById('tile-pulse').addEventListener('click', function () { showComingSoon('Maxpri Pulse'); });
+  document.getElementById('tile-write').addEventListener('click', function () { showComingSoon('Maxpri Write'); });
+
+  document.getElementById('btn-signout').addEventListener('click', function () {
+    currentUser = null;
+    sessionCode = null;
+    showPanel('panel-entry');
+  });
+
+  document.getElementById('btn-entry-login').addEventListener('click',   function () { showPanel('panel-login'); });
+  document.getElementById('btn-entry-signup').addEventListener('click',  function () { showPanel('panel-signup'); });
+  document.getElementById('btn-entry-signup2').addEventListener('click', function () { showPanel('panel-signup'); });
+  document.getElementById('btn-signup-to-login').addEventListener('click', function () { showPanel('panel-login'); });
+  document.getElementById('btn-login-to-signup').addEventListener('click', function () { showPanel('panel-signup'); });
+  document.getElementById('btn-login-back').addEventListener('click',    function () { showPanel('panel-entry'); });
+
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "voyager",
+  "main": "worker.js",
+  "compatibility_date": "2026-07-23",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "VOYAGER_FILES",
+      "id": "d4401a6430a04c779b14f7c87c113106"
+    }
+  ],
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}

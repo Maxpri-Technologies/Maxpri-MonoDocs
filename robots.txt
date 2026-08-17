@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /auth
+Disallow: /voyager/plans
+
+Sitemap: https://maxpritech.com/sitemap.xml

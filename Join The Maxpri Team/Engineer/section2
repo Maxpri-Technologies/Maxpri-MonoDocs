@@ -1,1 +1,64 @@
+================================================================================
+SECTION 2: MAXPRI SOFTWARE ENGINEERING PRACTICES & CODING STANDARDS
+================================================================================
 
+This document details the core engineering standards, version control protocols, code review processes, and quality assurances expected from every Maxpri engineer.
+
+--------------------------------------------------------------------------------
+2.1 CODE QUALITY & ARCHITECTURE
+--------------------------------------------------------------------------------
+
+1. Clean & Self-Documenting Code
+   - Write clear variable, function, and file names that express intent.
+   - Prefer self-explanatory code over excessive commenting; comment *why*, not *what*.
+   - Keep functions focused on a single responsibility.
+
+2. Minimal Dependency Overhead
+   - Avoid introducing heavy npm packages for simple tasks that native Web APIs or lightweight utilities can achieve.
+   - Leverage edge compute (Cloudflare Workers) and browser standards (HTML5, CSS custom properties, vanilla JS ES6+).
+
+3. Security First
+   - Never hardcode API keys, tokens, or credentials in client-side code or git repositories. Use Cloudflare Worker secret bindings and `.dev.vars` for local development.
+   - Validate and sanitize all user input before processing or persisting.
+   - Sanitize DOM manipulations to prevent XSS vulnerabilities.
+
+--------------------------------------------------------------------------------
+2.2 VERSION CONTROL & GIT WORKFLOW
+--------------------------------------------------------------------------------
+
+1. Branch Naming Conventions
+   - Feature branches: `feature/short-description` (e.g., `feature/voyager-auth`)
+   - Bug fixes: `fix/short-description` (e.g., `fix/chat-widget-mobile`)
+   - Documentation: `docs/short-description` (e.g., `docs/monodocs-update`)
+
+2. Commit Messages
+   - Format: `<type>: <short imperative summary>`
+   - Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+   - Subject lines should be under 50 characters and capitalized.
+   - Example: `feat: add live status indicator to voyager agent`
+
+3. Pull Requests & Code Reviews
+   - All code pushed to production branches must pass review.
+   - PRs must include a summary of changes, testing steps, and relevant screenshots if UI changes were made.
+   - Verify local execution and edge worker compatibility before submitting PRs.
+
+--------------------------------------------------------------------------------
+2.3 PERFORMANCE & TESTING STANDARDS
+--------------------------------------------------------------------------------
+
+1. Performance Budget
+   - Maintain fast load times: page interactive time under 1.5 seconds.
+   - Keep total initial asset size minimal. Use vector SVGs and optimized WebP/PNG assets.
+
+2. Testing & Verification
+   - Test UI responsiveness across mobile, tablet, and desktop viewports.
+   - Test edge worker logic using `npx wrangler dev` or local mocks.
+   - Verify all links, modals, and interactive widgets function error-free in modern browsers (Chrome, Firefox, Safari, Edge).
+
+--------------------------------------------------------------------------------
+2.4 DEPLOYMENT & EDGE INFRASTRUCTURE
+--------------------------------------------------------------------------------
+
+- Maxpri applications utilize Cloudflare Workers for global routing and edge execution.
+- Wrangler configurations (`wrangler.jsonc`) define worker routes, environment variables, and bindings.
+- Always verify routing changes on staging worker preview deployments before promoting to production (`maxpritech.com`).

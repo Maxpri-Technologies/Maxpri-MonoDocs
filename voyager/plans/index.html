@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voyager Pro — Plans</title>
+<meta name="description" content="Subscribe to Voyager Pro, the agentic browser extension by Maxpri Technologies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="shortcut icon" href="/voyager/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  /* ---- Plans-page-only styles (kept local so the shared stylesheet stays untouched) ---- */
+  main.plans-main { max-width: 1200px; margin: 0 auto; padding: 10rem 2rem 6rem; }
+  .plans-back { font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; }
+  .plans-back:hover { color: var(--text-primary); }
+  .plans-header { text-align: center; max-width: 640px; margin: 3rem auto 4rem; }
+  .plans-header h1 { margin-bottom: 1rem; font-size: clamp(2rem, 5vw, 3rem); }
+
+  .plan-card {
+    max-width: 460px; margin: 0 auto; background: var(--bg-slate);
+    border: 1px solid var(--accent-blue); border-radius: 12px; padding: 2.5rem;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; overflow: hidden;
+  }
+  .plan-badge {
+    position: absolute; top: 1.25rem; right: 1.25rem; font-family: var(--font-mono);
+    font-size: 0.65rem; text-transform: uppercase; color: var(--accent-cyan);
+    background: rgba(34, 211, 238, 0.1); padding: 3px 10px; border-radius: 4px;
+  }
+  .plan-name { font-family: var(--font-mono); color: var(--accent-blue); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+  .plan-price { font-size: 2.75rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .plan-price span { font-size: 1rem; font-weight: 500; color: var(--text-secondary); }
+  .plan-sub { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 2rem; }
+
+  .plan-features { list-style: none; margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 0.9rem; }
+  .plan-features li { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.92rem; color: var(--text-primary); }
+  .plan-features li::before { content: "✓"; color: var(--accent-cyan); font-weight: 700; flex-shrink: 0; }
+  .plan-features li small { display: block; color: var(--text-secondary); font-size: 0.8rem; margin-top: 0.15rem; }
+
+  #paypal-button-container { min-height: 45px; }
+
+  .payment-note { margin-top: 1.25rem; font-size: 0.75rem; color: var(--text-secondary); text-align: center; }
+  .payment-status { margin-top: 1rem; font-size: 0.85rem; text-align: center; min-height: 1.2em; }
+  .payment-status.error { color: #f87171; }
+  .payment-status.pending { color: var(--text-secondary); }
+
+  .unlock-panel { display: none; max-width: 460px; margin: 2rem auto 0; background: var(--bg-slate); border: 1px solid var(--accent-cyan); border-radius: 12px; padding: 2rem 2.5rem; text-align: center; }
+  .unlock-panel.visible { display: block; }
+  .unlock-panel h3 { color: var(--accent-cyan); }
+  .unlock-panel .btn { display: inline-block; margin-top: 1rem; }
+  .install-note { margin-top: 1.5rem; text-align: left; background: var(--bg-black); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 1.25rem 1.5rem; }
+  .install-note p { margin-bottom: 0.6rem; font-size: 0.85rem; }
+  .install-note ol { margin-left: 1.1rem; color: var(--text-secondary); font-size: 0.85rem; }
+  .install-note li { margin-bottom: 0.35rem; }
+  .install-note code { font-family: var(--font-mono); background: var(--bg-slate); padding: 0.1rem 0.4rem; border-radius: 3px; color: var(--accent-cyan); font-size: 0.8rem; }
+
+  #payWrap.hidden { display: none; }
+  .btn[disabled] { opacity: 0.5; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<div class="digital-grid" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">/</span>
+      <span class="brand-word">Voyager</span>
+    </a>
+    <nav class="nav-links">
+      <a class="plans-back" href="../index.html">&larr; Back to Voyager</a>
+    </nav>
+  </div>
+</header>
+
+<main class="plans-main">
+
+  <div class="plans-header">
+    <p class="eyebrow" style="justify-content:center;"><span class="eyebrow-dot"></span> Subscription</p>
+    <h1>Get Voyager Pro</h1>
+    <p class="lede" style="margin:0 auto;">Unlock the full agentic browser extension. Your download unlocks the moment your subscription is confirmed — verified server-side, not just in your browser.</p>
+  </div>
+
+  <div id="payWrap">
+    <div class="plan-card">
+      <span class="plan-badge">Pro</span>
+      <p class="plan-name">Voyager Pro</p>
+      <p class="plan-price">$5<span>/month</span></p>
+      <p class="plan-sub">Full access to the Voyager agent, billed monthly. Cancel anytime.</p>
+
+      <ul class="plan-features">
+        <li>Context-aware automation <small>Reads the live DOM and accessibility tree to understand every button and field it interacts with.</small></li>
+        <li>Native browser interaction <small>Runs inside your real Chrome profile — your active sessions and logins, no extra APIs.</small></li>
+        <li>Traceable reasoning log <small>See every step Voyager takes and why, in plain language.</small></li>
+        <li>Human-in-the-loop safety <small>Pauses for your explicit confirmation before sensitive actions like payments.</small></li>
+        <li>Priority updates &amp; support</li>
+      </ul>
+
+
+      <!-- PASTE PAYPAL BUTTON CODE HERE -->
+      <div id="paypal-button-container"></div>
+      <div id="paypal-button-container-P-78D63219UC5478426NJUQYOA"></div>
+      <script src="https://www.paypal.com/sdk/js?client-id=BAAvq6dS3DmfEOwI1PhprdT25ueCqB5vSw0sEIGEImFm4W1iyE8ClrJxE08cVEgn711iIfepfTOwmbkgZQ&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+      <script>
+        paypal.Buttons({
+            style: {
+                shape: 'pill',
+                color: 'gold',
+                layout: 'vertical',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+              return actions.subscription.create({
+                /* Creates the subscription */
+                plan_id: 'P-78D63219UC5478426NJUQYOA'
+              });
+            },
+            onApprove: function(data, actions) {
+              alert(data.subscriptionID); // You can add optional success message for the subscriber here
+            }
+        }).render('#paypal-button-container-P-78D63219UC5478426NJUQYOA'); // Renders the PayPal button
+      </script>
+      <!-- END PAYPAL BUTTON CODE -->
+
+      <p class="payment-status" id="paymentStatus"></p>
+      <p class="payment-note">Secure checkout via PayPal. Your download link is issued only after we verify your subscription is active with PayPal directly.</p>
+    </div>
+  </div>
+
+  <div class="unlock-panel" id="unlockPanel">
+    <h3>Subscription confirmed</h3>
+    <p class="lede" style="margin:0.5rem auto 0; font-size:1rem;">Thanks for subscribing to Voyager Pro. Your download link is ready and expires in a few minutes for security — if it expires, just come back to this page.</p>
+    <a class="btn btn-primary" id="downloadBtn" href="#">Download Voyager (.zip)</a>
+
+    <div class="install-note">
+      <p><strong>Not yet on the Chrome Web Store.</strong> Install manually:</p>
+      <ol>
+        <li>Download and unzip the file above</li>
+        <li>Open <code>chrome://extensions</code> in Chrome</li>
+        <li>Enable <strong>Developer mode</strong> (top right)</li>
+        <li>Click <strong>Load unpacked</strong> and select the unzipped folder</li>
+      </ol>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="brand">
+      <span class="brand-mark">/</span>
+      <span>Voyager</span>
+    </div>
+    <p class="footer-note">A project by <a href="https://maxpritech.com">Maxpri Technologies</a></p>
+  </div>
+</footer>
+
+<script>
+  var statusEl = document.getElementById('paymentStatus');
+
+  function setStatus(msg, cls) {
+    statusEl.textContent = msg || '';
+    statusEl.className = 'payment-status' + (cls ? ' ' + cls : '');
+  }
+
+  // Called from the PayPal button's onApprove callback with the real
+  // subscription ID. This does NOT unlock anything by itself — it asks
+  // the backend Worker to check with PayPal server-side first.
+  async function handleSubscriptionApproved(subscriptionID) {
+    setStatus('Confirming your subscription with PayPal…', 'pending');
+    try {
+      var res = await fetch('/api/verify-subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subscriptionID: subscriptionID })
+      });
+      var data = await res.json();
+
+      if (!res.ok || !data.token) {
+        setStatus('We could not confirm an active subscription. If you were just charged, contact support and we will sort it out.', 'error');
+        return;
+      }
+
+      unlockVoyagerDownload(data.token);
+    } catch (e) {
+      setStatus('Network error confirming your subscription. Please try again.', 'error');
+    }
+  }
+
+  function unlockVoyagerDownload(token) {
+    var downloadBtn = document.getElementById('downloadBtn');
+    downloadBtn.href = '/api/download?token=' + encodeURIComponent(token);
+    document.getElementById('payWrap').classList.add('hidden');
+    document.getElementById('unlockPanel').classList.add('visible');
+    document.getElementById('unlockPanel').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+
+</body>
+</html>

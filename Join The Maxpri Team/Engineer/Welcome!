@@ -1,1 +1,47 @@
-Welcome!
+================================================================================
+                    WELCOME TO THE MAXPRI ENGINEERING TEAM
+================================================================================
+
+Welcome aboard! We are thrilled to have you join Maxpri Technologies.
+
+At Maxpri, we design, build, and maintain high-performance software systems and intelligent digital products. As an engineer at Maxpri, you are part of a team dedicated to technical craftsmanship, clean code architecture, system performance, and modern developer experiences.
+
+--------------------------------------------------------------------------------
+1. OUR MISSION & CORE ENGINEERING PHILOSOPHY
+--------------------------------------------------------------------------------
+
+- Systems-First Mindset: We build interconnected systems, not isolated scripts or disposable code. Everything we design considers long-term maintainability, edge performance, and security.
+- Pragmatic Innovation: We prioritize direct, lightweight, high-performance tech stacks (Vanilla JS, CSS custom systems, Edge Workers) to maximize user speed and minimize infrastructure complexity.
+- Human-in-the-Loop AI: We build agentic systems (such as Voyager and Pulse) that augment human capabilities while keeping transparency, control, and privacy front and center.
+- Quality & Speed: We ship rapidly—delivering initial prototypes within days—without sacrificing security, accessibility, or code standards.
+
+--------------------------------------------------------------------------------
+2. YOUR FIRST-WEEK CHECKLIST
+--------------------------------------------------------------------------------
+
+[ ] 1. Account Setup
+    - Set up your GitHub account (see `Setup/github`).
+    - Configure your IDE (VS Code recommended, see `Setup/ide`).
+    - Verify access to Maxpri organization repositories and Cloudflare Workers environments.
+
+[ ] 2. Environment Setup
+    - Clone the `Maxpri-MonoDocs` repository.
+    - Test local serving (`python3 -m http.server` or `npx serve`).
+    - Install `wrangler` CLI for edge worker development (`npm install -g wrangler`).
+
+[ ] 3. Architecture & Product Suite Review
+    - Review `README.md` for a comprehensive overview of the Maxpri Ecosystem.
+    - Explore Maxpri Valley products (Write, Pulse, Vault, Orbit, Colleague, Access).
+    - Review Voyager agent capabilities (`/voyager`).
+
+[ ] 4. Engineering Principles & Guidelines
+    - Read `Join The Maxpri Team/Engineer/section2` for detailed engineering, Git, and code review standards.
+
+--------------------------------------------------------------------------------
+3. TEAM COMMUNICATION & SUPPORT
+--------------------------------------------------------------------------------
+
+- Engineering Lead: Reach out via internal channels or email (maxpri.tech@gmail.com).
+- Direct Access: All team members have direct access to engineering decision-makers and architectural leads.
+
+Welcome to the team—let's build systems together!

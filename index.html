@@ -1,0 +1,597 @@
+﻿<!DOCTYPE html>
+<html lang="en"><head>
+    <!--
+        Redirect helper:
+        - Client-side: the script below checks the hostname and uses `location.replace()` to redirect when hosted on workers.dev.
+          NOTE: client-side redirects cannot set the HTTP status to 301. They perform a browser navigation instead.
+        - Server-side (recommended for a true 301): use a Cloudflare Worker like the example shown here. Deploy it separately.
+
+        Cloudflare Worker example (paste into a Worker script):
+        addEventListener('fetch', event => {
+          const url = new URL(event.request.url);
+          if (url.hostname.includes('workers.dev')) {
+            return event.respondWith(Response.redirect('https://maxpritech.com', 301));
+          }
+          return event.respondWith(fetch(event.request));
+        });
+    -->
+
+    <script>
+        (function(){
+            try {
+                if (typeof window !== 'undefined' && window.location && /workers\.dev/i.test(window.location.hostname)) {
+                    // Client-side redirect (cannot set HTTP 301 from static HTML)
+                    window.location.replace('https://maxpritech.com');
+                }
+            } catch (e) {
+                // swallow errors to avoid breaking the page
+                console.error('redirect check failed', e);
+            }
+        })();
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maxpri Technologies</title>
+    <meta name="description" content="Maxpri Technologies offers custom software engineering services including application development, system architecture, automation, and legacy modernization." />
+    <meta property="og:site_name" content="Maxpri Technologies" />
+    <meta property="og:title" content="Maxpri Technologies" />
+    <meta property="og:description" content="Maxpri Technologies offers custom software engineering services including application development, system architecture, automation, and legacy modernization." />
+    <meta property="og:url" content="https://maxpritech.com" />
+    <meta property="og:image" content="https://maxpritech.com/logo.png" />
+    <meta property="og:type" content="website" />
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Maxpri Technologies",
+    "url": "https://maxpritech.com",
+    "logo": "https://maxpritech.com/logo.png",
+    "sameAs": []
+    }
+
+    </script>
+    <link rel="shortcut icon" href="favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="favicons/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="favicons/favicon-256x256.png">
+    <meta name="google-site-verification" content="W6n2YwxP1fWLj9nNQaeh3a7M7qpGHw7YbkpWZMsbEnE" />
+    <!-- EmailJS Library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("DuL1BMXa7eKGly4wK");
+        })();
+    </script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"><div class="particle" style="left: 63.9302%; animation-delay: 8.91596s; animation-duration: 10.8337s;"></div><div class="particle" style="left: 39.3532%; animation-delay: 14.3676s; animation-duration: 13.9915s;"></div><div class="particle" style="left: 99.4129%; animation-delay: 7.88869s; animation-duration: 10.8149s;"></div><div class="particle" style="left: 80.5754%; animation-delay: 12.2867s; animation-duration: 14.1383s;"></div><div class="particle" style="left: 11.452%; animation-delay: 14.594s; animation-duration: 14.5651s;"></div><div class="particle" style="left: 31.771%; animation-delay: 13.7901s; animation-duration: 17.4007s;"></div><div class="particle" style="left: 7.10784%; animation-delay: 12.7071s; animation-duration: 15.0456s;"></div><div class="particle" style="left: 47.3333%; animation-delay: 6.05889s; animation-duration: 11.7992s;"></div><div class="particle" style="left: 1.59556%; animation-delay: 12.7574s; animation-duration: 15.6912s;"></div><div class="particle" style="left: 63.8663%; animation-delay: 10.3391s; animation-duration: 10.2074s;"></div><div class="particle" style="left: 83.2889%; animation-delay: 14.7813s; animation-duration: 13.1325s;"></div><div class="particle" style="left: 43.4742%; animation-delay: 14.0276s; animation-duration: 16.5821s;"></div><div class="particle" style="left: 98.3956%; animation-delay: 6.75484s; animation-duration: 19.6968s;"></div><div class="particle" style="left: 83.2634%; animation-delay: 7.97214s; animation-duration: 17.07s;"></div><div class="particle" style="left: 29.467%; animation-delay: 9.86583s; animation-duration: 18.7545s;"></div><div class="particle" style="left: 72.0369%; animation-delay: 11.7884s; animation-duration: 14.4063s;"></div><div class="particle" style="left: 67.4609%; animation-delay: 0.60888s; animation-duration: 18.3988s;"></div><div class="particle" style="left: 79.1838%; animation-delay: 10.3979s; animation-duration: 18.8878s;"></div><div class="particle" style="left: 4.57556%; animation-delay: 5.13755s; animation-duration: 16.1432s;"></div><div class="particle" style="left: 24.3736%; animation-delay: 2.9151s; animation-duration: 16.018s;"></div><div class="particle" style="left: 68.1917%; animation-delay: 13.4823s; animation-duration: 15.9094s;"></div><div class="particle" style="left: 57.0056%; animation-delay: 3.77072s; animation-duration: 18.4709s;"></div><div class="particle" style="left: 61.2243%; animation-delay: 13.1846s; animation-duration: 16.5001s;"></div><div class="particle" style="left: 5.4922%; animation-delay: 2.14911s; animation-duration: 17.951s;"></div><div class="particle" style="left: 85.101%; animation-delay: 9.75089s; animation-duration: 16.0432s;"></div><div class="particle" style="left: 63.7805%; animation-delay: 3.86412s; animation-duration: 18.3463s;"></div><div class="particle" style="left: 98.0297%; animation-delay: 13.2017s; animation-duration: 11.7586s;"></div><div class="particle" style="left: 45.9989%; animation-delay: 8.47367s; animation-duration: 17.4589s;"></div><div class="particle" style="left: 96.2077%; animation-delay: 10.0751s; animation-duration: 19.3311s;"></div><div class="particle" style="left: 33.0538%; animation-delay: 9.29111s; animation-duration: 16.9352s;"></div><div class="particle" style="left: 19.4238%; animation-delay: 8.90314s; animation-duration: 13.3518s;"></div><div class="particle" style="left: 24.7146%; animation-delay: 1.04002s; animation-duration: 16.8562s;"></div><div class="particle" style="left: 79.9262%; animation-delay: 0.568804s; animation-duration: 19.0237s;"></div><div class="particle" style="left: 21.702%; animation-delay: 10.9764s; animation-duration: 14.5424s;"></div><div class="particle" style="left: 77.4722%; animation-delay: 0.14148s; animation-duration: 12.1593s;"></div><div class="particle" style="left: 82.3302%; animation-delay: 9.36702s; animation-duration: 14.7682s;"></div><div class="particle" style="left: 84.0462%; animation-delay: 0.164154s; animation-duration: 10.3884s;"></div><div class="particle" style="left: 66.4028%; animation-delay: 11.2838s; animation-duration: 14.1739s;"></div><div class="particle" style="left: 77.2877%; animation-delay: 12.0983s; animation-duration: 19.1187s;"></div><div class="particle" style="left: 53.2037%; animation-delay: 4.90362s; animation-duration: 14.125s;"></div><div class="particle" style="left: 77.4432%; animation-delay: 8.75421s; animation-duration: 10.6344s;"></div><div class="particle" style="left: 89.1122%; animation-delay: 8.05452s; animation-duration: 19.4253s;"></div><div class="particle" style="left: 54.5653%; animation-delay: 10.8714s; animation-duration: 17.7747s;"></div><div class="particle" style="left: 95.1674%; animation-delay: 14.2874s; animation-duration: 17.1869s;"></div><div class="particle" style="left: 99.4944%; animation-delay: 13.1049s; animation-duration: 14.2427s;"></div><div class="particle" style="left: 70.7184%; animation-delay: 14.1899s; animation-duration: 10.0909s;"></div><div class="particle" style="left: 38.7381%; animation-delay: 12.4165s; animation-duration: 11.0491s;"></div><div class="particle" style="left: 6.80998%; animation-delay: 7.63762s; animation-duration: 17.2139s;"></div><div class="particle" style="left: 72.7917%; animation-delay: 12.4832s; animation-duration: 13.7894s;"></div><div class="particle" style="left: 69.0794%; animation-delay: 9.97106s; animation-duration: 10.8738s;"></div></div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Maxpri Logo" style="height: 45px; width: auto; margin-right: 12px;" />
+                <span style="font-size: 1.8rem; font-weight: 700; color: var(--white);">Maxpri</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/products">Products</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#why-us">Why Us</a></li>
+                <li><a href="#order">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <a href="https://maxpritech.com/apps" class="drawer-link">Products</a>
+        <a href="#services" class="drawer-link">Services</a>
+        <a href="#process" class="drawer-link">The Process</a>
+        <a href="#why-us" class="drawer-link">Why Us</a>
+        <a href="#order" class="drawer-link">Pricing</a>
+        <a href="#contact" class="drawer-link">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-aurora"></div>
+        <div class="hero-content">
+            <h1><span class="gradient-text">Custom Software Engineering</span> That Scales</h1>
+            <p>We design, develop, and maintain high-performance applications engineered for long-term reliability and growth.</p>
+
+            <div class="cta-buttons">
+                <a href="https://order.maxpri.workers.dev" class="btn btn-primary ripple magnetic-btn">Start Your Project</a>
+                <a href="#services" class="btn btn-secondary ripple magnetic-btn">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Maxpri Ticker -->
+    <div class="tech-ticker">
+        <div class="tech-ticker-inner">
+            <div class="tech-badge"><span>🚀</span> 50+ Apps Shipped</div>
+            <div class="tech-badge"><span>⚡</span> 2–5 Day Delivery</div>
+            <div class="tech-badge"><span>🔒</span> Security First</div>
+            <div class="tech-badge"><span>🎯</span> Systems-First Mindset</div>
+            <div class="tech-badge"><span>📈</span> 99% Uptime Average</div>
+            <div class="tech-badge"><span>🔄</span> Legacy Modernization</div>
+            <div class="tech-badge"><span>📐</span> Clean Code Principles</div>
+            <div class="tech-badge"><span>🧩</span> 3 Service Tiers</div>
+            <div class="tech-badge"><span>🛠️</span> Ongoing Support</div>
+            <div class="tech-badge"><span>⚙️</span> Intelligent Automation</div>
+            <div class="tech-badge"><span>🏗️</span> Built to Scale</div>
+            <div class="tech-badge"><span>🤝</span> Direct Engineer Access</div>
+            <!-- duplicate for seamless loop -->
+            <div class="tech-badge"><span>🚀</span> 50+ Apps Shipped</div>
+            <div class="tech-badge"><span>⚡</span> 2–5 Day Delivery</div>
+            <div class="tech-badge"><span>🔒</span> Security First</div>
+            <div class="tech-badge"><span>🎯</span> Systems-First Mindset</div>
+            <div class="tech-badge"><span>📈</span> 99% Uptime Average</div>
+            <div class="tech-badge"><span>🔄</span> Legacy Modernization</div>
+            <div class="tech-badge"><span>📐</span> Clean Code Principles</div>
+            <div class="tech-badge"><span>🧩</span> 3 Service Tiers</div>
+            <div class="tech-badge"><span>🛠️</span> Ongoing Support</div>
+            <div class="tech-badge"><span>⚙️</span> Intelligent Automation</div>
+            <div class="tech-badge"><span>🏗️</span> Built to Scale</div>
+            <div class="tech-badge"><span>🤝</span> Direct Engineer Access</div>
+        </div>
+    </div>
+
+    <!-- Maxpri Valley Section -->
+    <section class="valley-section">
+        <div class="container">
+            <div class="valley-announcement fade-in visible">
+                <h3>Introducing Maxpri VALLEY</h3>
+                <p class="valley-subtitle">The Operating System for Modern Business</p>
+                <p class="valley-description">
+                    Maxpri Valley is an all-in-one AI workspace for business.
+                </p>
+                <a href="https://valley.maxpri.workers.dev/" class="valley-btn" target="_blank">
+                    Open VALLEY <span class="arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voyager Section Preview Image -->
+<section style="padding: 0 2rem 4rem; background: var(--dark);">
+    <div style="
+        max-width: 1100px;
+        margin: 0 auto;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    ">
+        <img
+            src="images/voyagerdis.svg"
+            alt="Project Voyager AI Web Browser"
+            style="
+                width: 100%;
+                display: block;
+                height: auto;
+            "
+        />
+        <div style="text-align:center; padding: 2rem 0;">
+    <a
+        href="https://maxpritech.com/voyager"
+        target="_blank"
+        style="
+            display:inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color:white;
+            text-decoration:none;
+            font-weight:700;
+            font-size:1rem;
+            border-radius:12px;
+            box-shadow: 0 10px 30px rgba(59,130,246,0.35);
+            transition: all 0.3s ease;
+        "
+        onmouseover="this.style.transform='translateY(-3px)'"
+        onmouseout="this.style.transform='translateY(0)'"
+    >
+        Preview Voyager Browser →
+    </a>
+</div>
+    </div>
+</section>
+
+
+    <!-- We Build Animation Section -->
+    <section class="we-build-section">
+        <div class="we-build-inner">
+            <span class="we-build-static">We Build</span>
+            <div class="we-build-carousel">
+                <div class="we-build-track">
+                    <span class="we-build-phrase">Custom Applications</span>
+                    <span class="we-build-phrase">Scalable Systems</span>
+                    <span class="we-build-phrase">Performance Solutions</span>
+                    <span class="we-build-phrase">Automation &amp; Tooling</span>
+                    <span class="we-build-phrase">Modernized Platforms</span>
+                    <span class="we-build-phrase">Reliable Software</span>
+                </div>
+            </div>
+            <span class="we-build-cursor"></span>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header fade-in visible">
+                <h2>What We Build</h2>
+                <p>From concept to deployment, we create scalable applications tailored to your business needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in tilt-card interactive-card glow-on-hover visible">
+                    <div class="service-icon float-animation">📱</div>
+                    <h3>Custom Application Development</h3>
+                    <p>Tailored software solutions built from the ground up to match your unique business requirements, workflows, and objectives.</p>
+                </div>
+                <div class="service-card fade-in tilt-card interactive-card glow-on-hover visible">
+                    <div class="service-icon float-animation">🏗️</div>
+                    <h3>System Architecture &amp; Design</h3>
+                    <p>Robust architectural planning ensuring your applications are scalable, maintainable, and built for long-term success.</p>
+                </div>
+                <div class="service-card fade-in tilt-card interactive-card glow-on-hover visible">
+                    <div class="service-icon float-animation">⚡</div>
+                    <h3>Performance Optimization</h3>
+                    <p>Fine-tuned systems that run smoothly under varying workloads while maintaining efficiency and reliability.</p>
+                </div>
+                <div class="service-card fade-in tilt-card interactive-card glow-on-hover visible">
+                    <div class="service-icon float-animation">🔧</div>
+                    <h3>Automation &amp; Tooling</h3>
+                    <p>Intelligent automation solutions that streamline repetitive processes and improve operational efficiency.</p>
+                </div>
+                <div class="service-card fade-in tilt-card interactive-card glow-on-hover visible">
+                    <div class="service-icon float-animation">🔄</div>
+                    <h3>Legacy System Modernization</h3>
+                    <p>Transform outdated systems into modern, efficient applications without losing critical functionality.</p>
+                </div>
+                <div class="service-card fade-in tilt-card interactive-card glow-on-hover visible">
+                    <div class="service-icon float-animation">🛠️</div>
+                    <h3>Maintenance &amp; Support</h3>
+                    <p>Ongoing technical support and system maintenance to keep your applications running at peak performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="process">
+        <div class="container">
+            <div class="section-header fade-in visible">
+                <h2>Our Development Process</h2>
+                <p>A structured approach to delivering exceptional software</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step fade-in visible">
+                    <div class="step-number">1</div>
+                    <h3>Discovery &amp; Planning</h3>
+                    <p>We analyze your requirements, objectives, and technical needs to create a comprehensive development roadmap.</p>
+                </div>
+                <div class="process-step fade-in visible">
+                    <div class="step-number">2</div>
+                    <h3>Architecture Design</h3>
+                    <p>Strategic system design with focus on scalability, security, and maintainability from day one.</p>
+                </div>
+                <div class="process-step fade-in visible">
+                    <div class="step-number">3</div>
+                    <h3>Development</h3>
+                    <p>Clean code implementation following best practices, with regular testing and quality assurance.</p>
+                </div>
+                <div class="process-step fade-in visible">
+                    <div class="step-number">4</div>
+                    <h3>Deployment &amp; Beyond</h3>
+                    <p>Smooth launch with ongoing support, monitoring, and optimization to ensure continued success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="why-us" class="why-choose">
+        <div class="container">
+            <div class="section-header fade-in visible">
+                <h2>Why Choose Maxpri</h2>
+                <p>Engineering excellence meets practical business solutions</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature fade-in visible">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-content">
+                        <h3>Systems-First Mindset</h3>
+                        <p>We build engineered systems designed for long-term performance, not temporary fixes.</p>
+                    </div>
+                </div>
+                <div class="feature fade-in visible">
+                    <div class="feature-icon">📐</div>
+                    <div class="feature-content">
+                        <h3>Clean Code Principles</h3>
+                        <p>Modular, maintainable code that scales with your business and adapts to future needs.</p>
+                    </div>
+                </div>
+                <div class="feature fade-in visible">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-content">
+                        <h3>Security First</h3>
+                        <p>Security and maintainability are foundational requirements in every project we deliver.</p>
+                    </div>
+                </div>
+                <div class="feature fade-in visible">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-content">
+                        <h3>Reduced Technical Debt</h3>
+                        <p>Systematic debugging and structured workflows that keep systems stable as they grow.</p>
+                    </div>
+                </div>
+                <div class="feature fade-in visible">
+                    <div class="feature-icon">⚙️</div>
+                    <div class="feature-content">
+                        <h3>Intelligent Automation</h3>
+                        <p>Streamlined processes through smart tooling that improves efficiency and minimizes errors.</p>
+                    </div>
+                </div>
+                <div class="feature fade-in visible">
+                    <div class="feature-icon">🚀</div>
+                    <div class="feature-content">
+                        <h3>Built to Scale</h3>
+                        <p>Every application is engineered to handle growth and perform under increasing demand.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Strip (new) -->
+    <div class="stats-strip fade-in visible">
+        <div class="stats-strip-inner">
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Applications Shipped</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Service Tiers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">99%</div>
+                <div class="stat-label">Uptime Average</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2-5 day</div>
+                <div class="stat-label">Delivery Timeline</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Build Something Great?</h2>
+            <p>Lets engineer a solution that drives your business forward</p>
+            <a href="#contact" class="btn btn-secondary">Get Started Today</a>
+        </div>
+    </section>
+
+    <!-- Order Section -->
+    <section id="order" class="order-section">
+        <div class="order-container">
+            <div class="section-header fade-in visible">
+                <h2>Order Your Custom App</h2>
+                <p>Choose a package that fits your needs or contact us for a custom quote</p>
+            </div>
+
+            <!-- Pricing Cards -->
+            <div class="pricing-cards">
+                <div class="pricing-card fade-in tilt-card visible">
+                    <h3>Starter</h3>
+                    <div class="price counter" data-target="500">$500</div>
+                    <p class="description">Perfect for small businesses and MVPs</p>
+                    <ul class="pricing-features">
+                        <li>Simple web or mobile app</li>
+                        <li>Basic user authentication</li>
+                        <li>Database integration</li>
+                        <li>Responsive design</li>
+                        <li>1 week delivery</li>
+                    </ul>
+                    <a href="https://order.maxpri.workers.dev/starter" class="btn btn-primary ripple magnetic-btn" style="width: 100%;" onclick="selectPackage('starter', 500)">Select Package</a>
+                </div>
+
+                <div class="pricing-card featured fade-in tilt-card visible">
+                    <div class="pricing-badge pulse-animation">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="price counter" data-target="720">$720</div>
+                    <p class="description">Full-featured applications for growing businesses</p>
+                    <ul class="pricing-features">
+                        <li>Advanced web/mobile app</li>
+                        <li>Advanced Google Authentication</li>
+                        <li>Third-party integrations</li>
+                        <li>Admin dashboard</li>
+                        <li>Payment processing</li>
+                        <li>6 months support</li>
+                        <li>1-3 week delivery</li>
+                    </ul>
+                    <a href="https://order.maxpri.workers.dev/professional" class="btn btn-primary ripple magnetic-btn" style="width: 100%;" onclick="selectPackage('professional', 720)">Select Package</a>
+                </div>
+
+                <div class="pricing-card fade-in tilt-card visible">
+                    <h3>Enterprise</h3>
+                    <div class="price counter" data-target="1200">$1,200</div>
+                    <p class="description">Large-scale systems with highly advanced architecture</p>
+                    <ul class="pricing-features">
+                        <li>Complex multi-platform app</li>
+                        <li>Microservices architecture</li>
+                        <li>Advanced security features</li>
+                        <li>Real-time capabilities</li>
+                        <li>Cloud infrastructure setup</li>
+                        <li>12 months support</li>
+                        <li>Custom timeline</li>
+                    </ul>
+                    <a href="https://order.maxpri.workers.dev/enterprise" class="btn btn-primary ripple magnetic-btn" style="width: 100%;" onclick="selectPackage('enterprise', 1200)">Select Package</a>
+                </div>
+            </div>
+
+            <!-- Order CTA -->
+<div class="order-form-container fade-in visible" style="text-align:center;">
+  <h3 style="color: var(--white); margin-bottom: 1rem; font-size: 1.8rem;">Ready to place your order?</h3>
+  <p style="color: var(--gray); margin-bottom: 2rem;">Skip the form and head straight to checkout.</p>
+  <a href="https://order.maxpri.workers.dev/" target="_blank" rel="noopener noreferrer" class="btn btn-primary ripple magnetic-btn" style="display:inline-flex; align-items:center; justify-content:center; padding: 1.1rem 2.5rem; border-radius: 999px; font-size: 1.1rem; box-shadow: 0 12px 30px rgba(59, 130, 246, 0.35);">Order Now</a>
+</div>
+<!-- Order Confirmation Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="success-icon">🎉</div>
+                <h2>Order Confirmed!</h2>
+                <p>Thank you for choosing Maxpri</p>
+            </div>
+
+            <div class="confirmation-code">
+                <label>Your Unique Confirmation Code</label>
+                <div class="code" id="confirmationCode">LOADING</div>
+                <p style="color: var(--gray); font-size: 0.85rem; margin-top: 1rem;">This code is unique and will never be generated again</p>
+            </div>
+
+            <div class="code-warning">
+                <div class="warning-icon">⚠️</div>
+                <p>IMPORTANT: Keep This Code Safe!</p>
+                <ul>
+                    <li>Save this code immediately - it will only be shown once</li>
+                    <li>You'll need it to access your project dashboard</li>
+                    <li>Use it for support inquiries and project updates</li>
+                    <li>Take a screenshot or write it down now</li>
+                </ul>
+            </div>
+
+            <div style="background: var(--dark); border-radius: 8px; padding: 1.5rem; margin-top: 1.5rem;">
+                <h4 style="color: var(--white); margin-bottom: 1rem; font-size: 1.1rem;">📧 What's Next?</h4>
+                <p style="color: var(--gray); font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                    You'll receive a confirmation email within 24 hours with your project timeline, kick-off meeting details, and contract documents. Our team will contact you shortly to begin your custom app development!
+                </p>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn btn-primary btn-copy" onclick="copyConfirmationCode()">📋 Copy Code</button>
+                <button class="btn btn-primary btn-close" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    <!-- Final Contact Section -->
+    <section id="contact" class="contact-info-section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Get In Touch</h2>
+                <p>Have a specific inquiry? Reach out to our engineering team directly.</p>
+            </div>
+
+            <div class="contact-info-grid">
+                <!-- Email Card -->
+                <a href="mailto:maxpri.tech@gmail.com" class="contact-method-card fade-in">
+                    <div class="contact-method-icon">✉️</div>
+                    <h3>Email Us</h3>
+                    <p>maxpri.tech@gmail.com</p>
+                    <span>We usually respond within 24 hours</span>
+                </a>
+
+                <!-- Phone Card -->
+                <a href="tel:+15551234567" class="contact-method-card fade-in">
+                    <div class="contact-method-icon">📞</div>
+                    <h3>Call Us</h3>
+                    <p>+1 (330) 305-2588</p>
+                    <span>Mon - Fri, 9am - 6pm EST</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="logo.png" alt="Maxpri Logo" style="height: 50px; width: auto; margin-bottom: 1rem;" />
+                <p>Engineering scalable, high-performance software systems designed for long-term reliability and growth.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <a href="#services">Custom Development</a>
+                <a href="#services">System Architecture</a>
+                <a href="#services">Performance Optimization</a>
+                <a href="#services">Automation Solutions</a>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <a href="#why-us">About Us</a>
+                <a href="#process">Our Process</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Maxpri. All rights reserved. | Building systems, not just software.</p>
+        </div>
+    </footer>
+
+    <!-- AI Chat Widget -->
+    <button id="chat-bubble" aria-label="Chat with Maxpri AI">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.02 2 11c0 2.67 1.19 5.07 3.08 6.74L4 22l4.5-1.5C9.56 20.81 10.75 21 12 21c5.52 0 10-4.02 10-9S17.52 2 12 2zm0 16c-1.1 0-2.16-.18-3.14-.51L6 18.5l.97-2.96C5.73 14.3 4 12.76 4 11c0-3.87 3.58-7 8-7s8 3.13 8 7-3.58 7-8 7z"/><circle cx="8.5" cy="11" r="1.25"/><circle cx="12" cy="11" r="1.25"/><circle cx="15.5" cy="11" r="1.25"/></svg>
+        <span id="chat-badge">1</span>
+    </button>
+    <div id="chat-panel">
+        <div class="chat-header">
+            <div class="chat-avatar">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.02 2 11c0 2.67 1.19 5.07 3.08 6.74L4 22l4.5-1.5C9.56 20.81 10.75 21 12 21c5.52 0 10-4.02 10-9S17.52 2 12 2z"/></svg>
+            </div>
+            <div class="chat-header-info">
+                <div class="chat-title">Maxpri Assistant</div>
+                <div class="chat-status">Online — AI-powered support</div>
+            </div>
+            <button class="chat-close-btn" onclick="toggleChat()" aria-label="Close chat">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-time">Today</div>
+            <div class="chat-row">
+                <div class="chat-row-avatar">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.02 2 11c0 2.67 1.19 5.07 3.08 6.74L4 22l4.5-1.5C9.56 20.81 10.75 21 12 21c5.52 0 10-4.02 10-9S17.52 2 12 2z"/></svg>
+                </div>
+                <div class="chat-msg bot">Hi there! 👋 I'm the Maxpri AI assistant. I can help you explore our services, packages, and pricing — or answer any technical questions. What can I help you with today?</div>
+            </div>
+        </div>
+        <div class="chat-chips" id="chatChips">
+            <div class="chat-chip" onclick="chipSend('What services do you offer?')">Services</div>
+            <div class="chat-chip" onclick="chipSend('Tell me about pricing')">Pricing</div>
+            <div class="chat-chip" onclick="chipSend('How long does a project take?')">Timeline</div>
+            <div class="chat-chip" onclick="chipSend('What is Maxpri Valley?')">Maxpri Valley</div>
+        </div>
+        <div class="chat-input-wrapper">
+            <div class="chat-input-row">
+                <input type="text" id="chatInput" placeholder="Ask me anything…" onkeydown="if(event.key==='Enter')sendChat()" autocomplete="off" />
+                <button class="chat-send-btn" id="chatSendBtn" onclick="sendChat()" aria-label="Send message">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                </button>
+            </div>
+            <div class="chat-footer-note">Powered by <a href="https://anthropic.com" target="_blank" rel="noopener">Claude AI</a> · Maxpri Technologies</div>
+        </div>
+    </div>
+
+
+<script src="js/script.js"></script>
+</body>
+</html>
