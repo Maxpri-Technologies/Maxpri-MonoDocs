@@ -1,0 +1,11 @@
+# Copy this file to .dev.vars for local `wrangler dev` testing.
+# Get these from developer.paypal.com -> Apps & Credentials.
+# In production, set them with:
+#   wrangler secret put PAYPAL_CLIENT_ID
+#   wrangler secret put PAYPAL_SECRET
+#   wrangler secret put PAYPAL_ENV
+# Never commit the real .dev.vars file (it's already in .gitignore).
+
+PAYPAL_CLIENT_ID=your_paypal_client_id
+PAYPAL_SECRET=your_paypal_secret
+PAYPAL_ENV=sandbox
